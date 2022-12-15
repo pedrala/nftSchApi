@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="buyhistory">
+
+	<!--  -->
+ 	<insert id="insertrequest" parameterType="hashMap">
+		<![CDATA[
+            insert into ${SYMBOL}_wallet.tbl_buy_history ( 
+										c_tm							                          
+									]]>	     
+									<if test='C_TM != null'>
+										<![CDATA[										
+										, c_tm
+										]]>
+									</if>
+									<if test='U_TM != null'>
+										<![CDATA[										
+										, u_tm
+										]]>
+									</if>
+									<if test='D_TM != null'>
+										<![CDATA[										
+										, d_tm
+										]]>
+									</if>
+									<if test='NIDX != null'>
+										<![CDATA[										
+										, nidx
+										]]>
+									</if>									
+									<if test='STATUS != null'>
+										<![CDATA[										
+										, status
+										]]>
+									</if>
+									<if test='TID != null'>
+										<![CDATA[										
+										, tid
+										]]>
+									</if>
+									<if test='WID != null'>
+										<![CDATA[										
+										, wid
+										]]>
+									</if>
+									<if test='ADDR != null'>
+										<![CDATA[										
+										, addr
+										]]>
+									</if>		
+									<if test='NADDR != null'>
+										<![CDATA[										
+										, naddr
+										]]>
+									</if>																	
+									<if test='NFTID != null'>
+										<![CDATA[												
+										, nftid
+										]]>
+									</if>
+									<if test='HASH != null'>
+										<![CDATA[												
+										, hash
+										]]>
+									</if>
+									<if test='PRICE != null'>
+										<![CDATA[											
+										, price
+										]]>
+									</if>
+									<if test='MAXP != null'>
+										<![CDATA[											
+										, maxp
+										]]>
+									</if>
+									<if test='STARTDAY != null'>
+										<![CDATA[											
+										, startday
+										]]>
+									</if>
+									<if test='LASTDAY != null'>
+										<![CDATA[											
+										, lastday
+										]]>
+									</if>
+									<if test='REWARD != null'>
+										<![CDATA[											
+										, reward
+										]]>
+									</if>														
+								<![CDATA[
+                                      )
+				values	(
+						now()
+						]]>	        
+						<if test='C_TM != null'>
+							<![CDATA[
+							, #{C_TM}
+							]]>
+						</if>
+						<if test='U_TM != null'>
+							<![CDATA[
+							, #{U_TM}
+							]]>
+						</if>
+						<if test='D_TM != null'>
+							<![CDATA[
+							, #{D_TM}
+							]]>
+						</if>
+						<if test='NIDX != null'>
+							<![CDATA[
+							, #{NIDX}
+							]]>
+						</if>						
+						<if test='STATUS != null'>
+							<![CDATA[
+							, #{STATUS}
+							]]>
+						</if>
+						<if test='TID != null'>
+							<![CDATA[
+							, #{TID}
+							]]>
+						</if>
+						<if test='WID != null'>
+							<![CDATA[
+							, #{WID}
+							]]>
+						</if>
+						<if test='ADDR != null'>
+							<![CDATA[
+							, #{ADDR}
+							]]>
+						</if>	
+						<if test='NADDR != null'>
+							<![CDATA[
+							, #{NADDR}
+							]]>
+						</if>											
+						<if test='NFTID != null'>
+							<![CDATA[												
+							, #{NFTID}
+							]]>
+						</if>
+						<if test='HASH != null'>
+							<![CDATA[												
+							, #{HASH}
+							]]>
+						</if>
+						<if test='PRICE != null'>
+							<![CDATA[												
+							, #{PRICE}
+							]]>
+						</if>
+						<if test='MAXP != null'>
+							<![CDATA[												
+							, #{MAXP}
+							]]>
+						</if>
+						<if test='STARTDAY != null'>
+							<![CDATA[												
+							, #{STARTDAY}
+							]]>
+						</if>
+						<if test='PRICE != null'>
+							<![CDATA[												
+							, #{PRICE}
+							]]>
+						</if>
+						<if test='LASTDAY != null'>
+							<![CDATA[
+	            			, #{LASTDAY}
+							]]>
+						</if>		
+						<if test='REWARD != null'>
+							<![CDATA[
+	            			, #{REWARD}
+							]]>
+						</if>								
+		<![CDATA[
+					)  
+		]]>
+		<selectKey keyProperty="IDX" resultType="integer"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<!-- -->
+	<update id="updaterequest" parameterType="hashMap">
+		<![CDATA[
+			update	${SYMBOL}_wallet.tbl_buy_history
+			set u_tm =  now()
+		]]>	
+		<if test='C_TM !=null'>
+			<![CDATA[			
+				, c_tm = #{C_TM}
+		]]>			
+		</if>
+		<if test='U_TM !=null'>
+			<![CDATA[				
+				, u_tm = #{U_TM}
+		]]>
+		</if>
+		<if test='D_TM !=null'>
+			<![CDATA[				
+				, d_tm = #{D_TM}
+		]]>
+		</if>
+		<if test='NIDX !=null'>
+			<![CDATA[			
+				, nidx = #{NIDX}
+		]]>			
+		</if>			
+		<if test='STATUS !=null'>
+			<![CDATA[				
+				, status = #{STATUS}
+		]]>			
+		</if>
+		<if test='TID !=null'>
+			<![CDATA[				
+				, tid = #{TID}
+		]]>			
+		</if>
+		<if test='WID !=null'>
+			<![CDATA[				
+				, wid = #{WID}
+		]]>			
+		</if>
+		<if test='ADDR !=null'>
+			<![CDATA[				
+				, addr = #{ADDR}
+		]]>			
+		</if>	
+		<if test='NADDR !=null'>
+			<![CDATA[				
+				, naddr = #{NADDR}
+		]]>			
+		</if>				
+		<if test='NFTID !=null'>
+			<![CDATA[				
+				, nftid = #{NFTID}
+		]]>			
+		</if>		
+		<if test='HASH !=null'>
+			<![CDATA[				
+				, hash = #{HASH}
+		]]>			
+		</if>	
+		<if test='PRICE !=null'>
+			<![CDATA[				
+				, price = #{PRICE}
+		]]>			
+		</if>
+		<if test='MAXP !=null'>
+			<![CDATA[				
+				, maxp = #{MAXP}
+		]]>			
+		</if>
+		<if test='STARTDAY !=null'>
+			<![CDATA[				
+				, startday = #{STARTDAY}
+		]]>			
+		</if>
+		<if test='LASTDAY !=null'>
+			<![CDATA[				
+				, lastday = #{LASTDAY}
+		]]>			
+		</if>
+		<if test='REWARD !=null'>
+			<![CDATA[				
+				, reward = #{REWARD}
+		]]>			
+		</if>
+		<![CDATA[
+			where	idx = #{IDX}
+		]]>
+	</update>
+	
+	<!--  -->	
+	<select id="selectrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.idx
+					, IFNULL(tw.c_tm, '0') AS c_tm
+					, IFNULL(tw.u_tm, '0') AS u_tm
+					, IFNULL(tw.d_tm, '0') AS d_tm
+					, tw.nidx
+					, tw.status
+					, IFNULL(tw.tid, '0') AS tid
+					, IFNULL(tw.wid, '0') AS wid
+					, IFNULL(tw.addr, '0') AS addr
+					, IFNULL(tw.naddr, '0') AS naddr
+					, IFNULL(tw.nftid, '0') AS nftid
+					, IFNULL(tw.hash, '0') AS hash
+					, IFNULL(tw.price, '0') AS price
+					, IFNULL(tw.maxp, '0') AS maxp
+					, tw.startday
+					, tw.lastday
+					, IFNULL(tw.reward, '0') AS reward
+			FROM ${SYMBOL}_wallet.tbl_buy_history tw
+			WHERE 1=1
+			]]>
+			<if test='IDX > 0'>
+			<![CDATA[
+				AND tw.idx=#{IDX}
+			]]>
+			</if>								
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='U_TM != null'>
+				<![CDATA[
+					AND tw.u_tm = #{U_TM}
+				]]>
+			</if>
+			<if test='D_TM != null'>
+				<![CDATA[
+					AND tw.d_tm = #{D_TM}
+				]]>
+			</if>
+			<if test='NIDX != null'>
+				<![CDATA[
+					AND tw.nidx = #{NIDX}
+				]]>
+			</if>
+			<if test='STATUS != null'>
+				<![CDATA[
+					AND tw.status = #{STATUS}
+				]]>
+			</if>		
+			<if test='TID != null'>
+				<![CDATA[
+					AND tw.tid = #{TID}
+				]]>
+			</if>		
+			<if test='WID != null'>
+				<![CDATA[
+					AND tw.wid = #{WID}
+				]]>
+			</if>		
+			<if test='ADDR != null'>
+				<![CDATA[
+					AND tw.addr = #{ADDR}
+				]]>
+			</if>
+			<if test='NADDR != null'>
+				<![CDATA[
+					AND tw.naddr = #{NADDR}
+				]]>
+			</if>			
+			<if test='NFTID != null'>
+				<![CDATA[
+					AND tw.nftid = #{NFTID}
+				]]>
+			</if>		
+			<if test='HASH != null'>
+				<![CDATA[
+					AND tw.hash = #{HASH}
+				]]>
+			</if>		
+			<if test='PRICE != null'>
+				<![CDATA[
+					AND tw.price = #{PRICE}
+				]]>
+			</if>								
+			<if test='MAXP != null'>
+				<![CDATA[
+					AND tw.maxp = #{MAXP}
+				]]>
+			</if>
+			<if test='STARTDAY != null'>
+				<![CDATA[
+					AND tw.startday = #{STARTDAY}
+				]]>
+			</if>
+			<if test='FROMSD != null and TOSD != null'>
+				<![CDATA[
+					AND DATE(tw.startday) BETWEEN #{FROMSD} AND #{TOSD}
+				]]>
+			</if>			
+			<if test='LASTDAY != null'>
+				<![CDATA[
+					AND tw.lastday = #{LASTDAY}
+				]]>
+			</if>
+			<if test='REWARD != null'>
+				<![CDATA[
+					AND tw.reward = #{REWARD}
+				]]>
+			</if>
+			<if test='FROMD != null and TOD != null'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FROMD} AND #{TOD}
+				]]>
+			</if>
+			<![CDATA[
+				ORDER BY 1 DESC
+			]]> 
+			<if test='PAGENO != null and ROWS != null'>
+				<![CDATA[
+					LIMIT	#{PAGENO}, #{ROWS}
+				]]> 
+			</if>
+ 
+	</select>	
+
+	<select id="countrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT COUNT(*) COUNT
+			FROM ${SYMBOL}_wallet.tbl_buy_history tw 
+			WHERE 1=1
+			]]>
+			<if test='IDX > 0'>
+			<![CDATA[
+				AND tw.idx=#{IDX}
+			]]>
+			</if>							
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='U_TM != null'>
+				<![CDATA[
+					AND tw.u_tm = #{U_TM}
+				]]>
+			</if>
+			<if test='D_TM != null'>
+				<![CDATA[
+					AND tw.d_tm = #{D_TM}
+				]]>
+			</if>
+			<if test='NIDX != null'>
+				<![CDATA[
+					AND tw.nidx = #{NIDX}
+				]]>
+			</if>
+			<if test='STATUS != null'>
+				<![CDATA[
+					AND tw.status = #{STATUS}
+				]]>
+			</if>		
+			<if test='TID != null'>
+				<![CDATA[
+					AND tw.tid = #{TID}
+				]]>
+			</if>		
+			<if test='WID != null'>
+				<![CDATA[
+					AND tw.wid = #{WID}
+				]]>
+			</if>		
+			<if test='ADDR != null'>
+				<![CDATA[
+					AND tw.addr = #{ADDR}
+				]]>
+			</if>
+			<if test='NADDR != null'>
+				<![CDATA[
+					AND tw.naddr = #{NADDR}
+				]]>
+			</if>				
+			<if test='NFTID != null'>
+				<![CDATA[
+					AND tw.nftid = #{NFTID}
+				]]>
+			</if>		
+			<if test='HASH != null'>
+				<![CDATA[
+					AND tw.hash = #{HASH}
+				]]>
+			</if>	
+			<if test='PRICE != null'>
+				<![CDATA[
+					AND tw.price = #{PRICE}
+				]]>
+			</if>								
+			<if test='MAXP != null'>
+				<![CDATA[
+					AND tw.maxp = #{MAXP}
+				]]>
+			</if>
+			<if test='STARTDAY != null'>
+				<![CDATA[
+					AND tw.startday = #{STARTDAY}
+				]]>
+			</if>
+			<if test='FROMSD != null and TOSD != null'>
+				<![CDATA[
+					AND DATE(tw.startday) BETWEEN #{FROMSD} AND #{TOSD}
+				]]>
+			</if>				
+			<if test='LASTDAY != null'>
+				<![CDATA[
+					AND tw.lastday = #{LASTDAY}
+				]]>
+			</if>
+			<if test='REWARD != null'>
+				<![CDATA[
+					AND tw.reward = #{REWARD}
+				]]>
+			</if>
+			<if test='FROMD != null and TOD != null'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FROMD} AND #{TOD}
+				]]>
+			</if>
+	</select>
+			
+	<select id="selectone" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.idx
+					, IFNULL(tw.c_tm, '0') AS c_tm
+					, IFNULL(tw.u_tm, '0') AS u_tm
+					, IFNULL(tw.d_tm, '0') AS d_tm
+					, tw.nidx
+					, tw.status
+					, IFNULL(tw.tid, '0') AS tid
+					, IFNULL(tw.wid, '0') AS wid
+					, IFNULL(tw.addr, '0') AS addr
+					, IFNULL(tw.naddr, '0') AS naddr
+					, IFNULL(tw.nftid, '0') AS nftid
+					, IFNULL(tw.hash, '0') AS hash
+					, IFNULL(tw.price, '0') AS price
+					, IFNULL(tw.maxp, '0') AS maxp
+					, tw.startday
+					, tw.lastday
+					, IFNULL(tw.reward, '0') AS reward
+			FROM ${SYMBOL}_wallet.tbl_buy_history tw
+			WHERE 1=1
+		]]>
+		<if test='IDX > 0'>
+		<![CDATA[
+			AND tw.idx=#{IDX}
+		]]>
+		</if>
+		<if test='NIDX > 0'>
+		<![CDATA[
+			AND tw.nidx=#{NIDX}
+		]]>
+		</if>		
+		<if test='STATUS != null'>
+			<![CDATA[
+				AND tw.status = #{STATUS}
+			]]>
+		</if>		
+		<if test='TID != null'>
+			<![CDATA[
+				AND tw.tid = #{TID}
+			]]>
+		</if>	
+		<if test='WID != null'>
+			<![CDATA[
+				AND tw.wid = #{WID}
+			]]>
+		</if>		
+		<if test='ADDR > 0'>
+		<![CDATA[
+			AND tw.addr=#{ADDR}
+		]]>
+		</if>			
+		<if test='NFTID > 0'>
+		<![CDATA[
+			AND tw.nftid=#{NFTID}
+		]]>
+		</if>		
+		<if test='HASH > 0'>
+		<![CDATA[
+			AND tw.hash=#{HASH}
+		]]>
+		</if>		
+		<if test='D_TM != null'>
+		<![CDATA[
+			AND tw.d_tm=#{D_TM}
+		]]>
+		</if>
+		<if test='FROMSD != null and TOSD != null'>
+			<![CDATA[
+				AND DATE(tw.startday) BETWEEN #{FROMSD} AND #{TOSD}
+			]]>
+		</if>			
+		<!-- AND tb.account_number IS NOT NULL  -->
+		<!-- AND tb.account_number != '' -->
+		LIMIT 0, 1		
+	</select>
+	
+	<delete id="realdeleterequest" parameterType="hashMap">
+		<![CDATA[
+			delete from ${SYMBOL}_wallet.tbl_buy_history where idx = #{IDX}
+		]]>
+	</delete>
+
+</mapper>	

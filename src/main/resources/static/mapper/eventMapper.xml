@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="event">
+
+	<!--  -->
+ 	<insert id="insertrequest" parameterType="hashMap">
+		<![CDATA[
+            insert into bitstoa.tbl_event ( <form method="post" action="">
+				
+            </form>
+										c_tm							                          
+									]]>	     
+									<if test='NO > 0'>
+										<![CDATA[                                        
+                                        , `no`
+										]]>
+									</if>
+									<if test='NAME != null'>
+										<![CDATA[										
+										, `name`
+										]]>
+									</if>
+									<if test='SYMBOL != null'>
+										<![CDATA[										
+										, symbol
+										]]>
+									</if>
+									<if test='VIEW_SYMBOL != null'>
+										<![CDATA[										
+										, view_symbol
+										]]>
+									</if>									
+									<if test='FAMILY_NO != null'>
+										<![CDATA[										
+										, family_no
+										]]>
+									</if>
+									<if test='INOUT != null'>
+										<![CDATA[												
+										, `inout`
+										]]>
+									</if>
+									<if test='IN_FEE != null'>
+										<![CDATA[											
+										, in_fee
+										]]>
+									</if>
+									<if test='OUT_FEE != null'>
+										<![CDATA[											
+										, out_fee
+										]]>
+									</if>
+									<if test='SHOW != null'>
+										<![CDATA[											
+										, `show`
+										]]>
+									</if>
+									<if test='WALLET_OPEN != null'>
+										<![CDATA[											
+										, wallet_open
+										]]>
+									</if>
+									<if test='WALLET_TYPE != null'>
+										<![CDATA[											
+										, wallet_type
+										]]>
+									</if>
+									<if test='SYMBOL_TXID != null'>
+										<![CDATA[											
+										, symbol_txid
+										]]>
+									</if>				
+									<if test='WALLET_ENABLE != null'>
+										<![CDATA[											
+										, wallet_enable
+										]]>
+									</if>																			
+								<![CDATA[
+                                      )
+				values	(
+						now()
+						]]>	        
+						<if test='NO > 0'>
+							<![CDATA[
+	            			, #{NO}
+							]]>
+						</if>
+						<if test='C_TM != null'>
+							<![CDATA[
+							, #{C_TM}
+							]]>
+						</if>
+						<if test='NAME != null'>
+							<![CDATA[
+							, #{NAME}
+							]]>
+						</if>
+						<if test='SYMBOL != null'>
+							<![CDATA[
+							, #{SYMBOL}
+							]]>
+						</if>
+						<if test='VIEW_SYMBOL != null'>
+							<![CDATA[
+							, #{VIEW_SYMBOL}
+							]]>
+						</if>						
+						<if test='FAMILY_NO != null'>
+							<![CDATA[
+							, #{FAMILY_NO}
+							]]>
+						</if>
+						<if test='INOUT != null'>
+							<![CDATA[												
+							, #{INOUT}
+							]]>
+						</if>
+						<if test='IN_FEE != null'>
+							<![CDATA[												
+							, #{IN_FEE}
+							]]>
+						</if>
+						<if test='OUT_FEE != null'>
+							<![CDATA[												
+							, #{OUT_FEE}
+							]]>
+						</if>
+						<if test='SHOW != null'>
+							<![CDATA[												
+							, #{SHOW}
+							]]>
+						</if>
+						<if test='WALLET_OPEN != null'>
+							<![CDATA[												
+							, #{WALLET_OPEN}
+							]]>
+						</if>
+						<if test='WALLET_TYPE != null'>
+							<![CDATA[												
+							, #{WALLET_TYPE}
+							]]>
+						</if>
+						<if test='SYMBOL_TXID != null'>
+							<![CDATA[
+	            			, #{SYMBOL_TXID}
+							]]>
+						</if>			
+						<if test='WALLET_ENABLE != null'>
+							<![CDATA[
+	            			, #{WALLET_ENABLE}
+							]]>
+						</if>						
+		<![CDATA[
+					)  
+		]]>
+		<selectKey keyProperty="NO" resultType="integer"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<!-- -->
+	<update id="updaterequest" parameterType="hashMap">
+		<![CDATA[
+			update	bitstoa.tbl_event
+			set c_tm =  now()
+		]]>	
+		<if test='C_TM !=null'>
+			<![CDATA[			
+				, c_tm = #{C_TM}
+		]]>			
+		</if>
+		<if test='NAME !=null'>
+			<![CDATA[				
+				, `name` = #{NAME}
+		]]>
+		</if>
+		<if test='SYMBOL !=null'>
+			<![CDATA[				
+				, `symbol` = #{SYMBOL}
+		]]>
+		</if>
+		<if test='VIEW_SYMBOL !=null'>
+			<![CDATA[			
+				, view_symbol = #{VIEW_SYMBOL}
+		]]>			
+		</if>			
+		<if test='FAMILY_NO !=null'>
+			<![CDATA[				
+				, family_no = #{FAMILY_NO}
+		]]>			
+		</if>
+		<if test='INOUT !=null'>
+			<![CDATA[				
+				, `inout` = #{INOUT}
+		]]>			
+		</if>		
+		<if test='IN_FEE !=null'>
+			<![CDATA[				
+				, in_fee = #{IN_FEE}
+		]]>			
+		</if>
+		<if test='OUT_FEE !=null'>
+			<![CDATA[				
+				, out_fee = #{OUT_FEE}
+		]]>			
+		</if>
+		<if test='SHOW !=null'>
+			<![CDATA[				
+				, `show` = #{SHOW}
+		]]>			
+		</if>
+		<if test='WALLET_OPEN !=null'>
+			<![CDATA[				
+				, wallet_open = #{WALLET_OPEN}
+		]]>			
+		</if>
+		<if test='WALLET_TYPE !=null'>
+			<![CDATA[				
+				, wallet_type = #{WALLET_TYPE}
+		]]>			
+		</if>
+		<if test='SYMBOL_TXID !=null'>
+			<![CDATA[				
+				, symbol_txid = #{SYMBOL_TXID}
+		]]>			
+		</if>
+		<if test='WALLET_ENABLE !=null'>
+			<![CDATA[				
+				, wallet_enable = #{WALLET_ENABLE}
+		]]>			
+		</if>		
+		<![CDATA[
+			where	`no` = #{NO}
+		]]>
+	</update>
+	
+	<!--  -->	
+	<select id="selectrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.no
+					, tw.c_tm
+					, tw.name
+					, tw.symbol
+					, tw.view_symbol
+					, tw.family_no
+					, tw.inout
+					, tw.in_fee
+					, tw.out_fee
+					, tw.show
+					, tw.wallet_open
+					, tw.wallet_type
+					, tw.symbol_txid
+					, tw.wallet_enable
+			FROM bitstoa.tbl_event tw
+			WHERE 1=1
+			]]>
+			<if test='NO > 0'>
+			<![CDATA[
+				AND tw.no=#{NO}
+			]]>
+			</if>								
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='NAME != null'>
+				<![CDATA[
+					AND tw.name = #{NAME}
+				]]>
+			</if>
+			<if test='SYMBOL != null'>
+				<![CDATA[
+					AND tw.symbol = #{SYMBOL}
+				]]>
+			</if>
+			<if test='VIEW_SYMBOL != null'>
+				<![CDATA[
+					AND tw.view_symbol = #{VIEW_SYMBOL}
+				]]>
+			</if>
+			<if test='SHOW != null'>
+				<![CDATA[
+					AND tw.show = #{SHOW}
+				]]>
+			</if>
+			<if test='WALLET_OPEN != null'>
+				<![CDATA[
+					AND tw.wallet_open = #{WALLET_OPEN}
+				]]>
+			</if>
+			<if test='WALLET_TYPE != null'>
+				<![CDATA[
+					AND tw.wallet_type = #{WALLET_TYPE}
+				]]>
+			</if>
+			<if test='SYMBOL_TXID != null'>
+				<![CDATA[
+					AND tw.symbol_txid = #{SYMBOL_TXID}
+				]]>
+			</if>
+			<if test='WALLET_ENABLE != null'>
+				<![CDATA[
+					AND tw.wallet_enable = #{WALLET_ENABLE}
+				]]>
+			</if>		
+			<if test='FAMILY_NODATE != null and INOUTDATE != ""'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FAMILY_NODATE} AND #{INOUTDATE}
+				]]>
+			</if>
+			<![CDATA[
+			ORDER BY 1 DESC
+			LIMIT	#{PAGENO}, #{ROWS}
+		]]>  
+	</select>	
+
+	<select id="countrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT COUNT(*) COUNT
+			FROM bitstoa.tbl_event tw 
+			WHERE 1=1
+			]]>
+			<if test='NO > 0'>
+			<![CDATA[
+				AND tw.no=#{NO}
+			]]>
+			</if>							
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='NAME != null'>
+				<![CDATA[
+					AND tw.name = #{NAME}
+				]]>
+			</if>
+			<if test='SYMBOL != null'>
+				<![CDATA[
+					AND tw.symbol = #{SYMBOL}
+				]]>
+			</if>
+			<if test='VIEW_SYMBOL != null'>
+				<![CDATA[
+					AND tw.view_symbol = #{VIEW_SYMBOL}
+				]]>
+			</if>
+			<if test='SHOW != null'>
+				<![CDATA[
+					AND tw.show = #{SHOW}
+				]]>
+			</if>
+			<if test='WALLET_OPEN != null'>
+				<![CDATA[
+					AND tw.wallet_open = #{WALLET_OPEN}
+				]]>
+			</if>
+			<if test='WALLET_TYPE != null'>
+				<![CDATA[
+					AND tw.wallet_type = #{WALLET_TYPE}
+				]]>
+			</if>
+			<if test='SYMBOL_TXID != null'>
+				<![CDATA[
+					AND tw.symbol_txid = #{SYMBOL_TXID}
+				]]>
+			</if>
+			<if test='WALLET_ENABLE != null'>
+				<![CDATA[
+					AND tw.wallet_enable = #{WALLET_ENABLE}
+				]]>
+			</if>
+			<if test='WALLET_ENABLE != null'>
+				<![CDATA[
+					AND tw.wallet_enable = #{WALLET_ENABLE}
+				]]>
+			</if>					
+			<if test='FAMILY_NODATE != null and INOUTDATE != ""'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FAMILY_NODATE} AND #{INOUTDATE};
+				]]>
+			</if>
+	</select>
+			
+	<select id="selectone" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.no
+					, tw.c_tm
+					, tw.name
+					, tw.symbol
+					, tw.view_symbol
+					, tw.family_no
+					, tw.inout
+					, tw.out_fee
+					, tw.show
+					, tw.wallet_open
+					, tw.wallet_type
+					, tw.symbol_txid
+					, tw.wallet_enable
+			FROM bitstoa.tbl_event tw
+			WHERE 1=1
+		]]>
+		<if test='NO > 0'>
+		<![CDATA[
+			AND tw.no=#{NO}
+		]]>
+		</if>			
+		<if test='SYMBOL != null'>
+		<![CDATA[
+			AND tw.symbol=#{SYMBOL}
+		]]>		
+		</if>	
+		<!-- AND tb.account_number IS NOT NULL  -->
+		<!-- AND tb.account_number != '' -->
+		LIMIT 0, 1		
+	</select>
+	
+	<delete id="realdeleterequest" parameterType="hashMap">
+		<![CDATA[
+			delete from bitstoa.tbl_event where no = #{NO}
+		]]>
+	</delete>
+	
+	<!-- 심볼별 시세 -->
+	<select id="selectSymbolPrice" parameterType="String" resultType="String">
+		SELECT 
+			price 
+		FROM 
+			bitstoa.tbl_symbol_price
+		WHERE 1=1
+		AND symbol = #{SYMBOL};
+	</select>
+		
+</mapper>	

@@ -1,0 +1,85 @@
+package com.walletmgr.api.Utils;
+
+import java.security.Security;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.jasypt.encryption.StringEncryptor;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+// application.properties 설정파일 암호/복호화 설정
+@Configuration
+public class JasyptConfig {
+	
+	/*
+기본 공급자 제공 알고리즘 
+		PBEWITHMD5ANDDES
+		PBEWITHSHA1ANDRC2_40
+		PBEWITHSHA1ANDRC2_128
+		PBEWITHSHA1ANDRC4_40
+		PBEWITHSHA1ANDRC4_128
+		PBEWITHSHA1ANDDESEDE
+		PBEWITHMD5ANDTRIPLEDES
+		
+기본 공급자 제공 알고리즘 - AES 알고리즘
+	encryptor.setIvGenerator(new RandomIvGenerator()); // 필수
+		PBEWITHHMACSHA1ANDAES_128
+		PBEWITHHMACSHA1ANDAES_256
+		PBEWITHHMACSHA224ANDAES_128
+		PBEWITHHMACSHA224ANDAES_256
+		PBEWITHHMACSHA256ANDAES_128
+		PBEWITHHMACSHA256ANDAES_256
+		PBEWITHHMACSHA384ANDAES_128
+		PBEWITHHMACSHA384ANDAES_256
+		PBEWITHHMACSHA512ANDAES_128
+		PBEWITHHMACSHA512ANDAES_256
+	BC 알고리즘
+		PBEWITHMD2ANDDES
+		PBEWITHMD5AND128BITAES-CBC-OPENSSL
+		PBEWITHMD5AND192BITAES-CBC-OPENSSL
+		PBEWITHMD5AND256BITAES-CBC-OPENSSL
+		PBEWITHMD5ANDDES
+		PBEWITHMD5ANDRC2
+		PBEWITHMD5ANDTRIPLEDES
+		PBEWITHSHA1ANDDES
+		PBEWITHSHA1ANDDESEDE
+		PBEWITHSHA1ANDRC2
+		PBEWITHSHA1ANDRC2_128
+		PBEWITHSHA1ANDRC2_40
+		PBEWITHSHA1ANDRC4_128
+		PBEWITHSHA1ANDRC4_40
+		PBEWITHSHA256AND128BITAES-CBC-BC
+		PBEWITHSHA256AND192BITAES-CBC-BC
+		PBEWITHSHA256AND256BITAES-CBC-BC
+		PBEWITHSHAAND128BITAES-CBC-BC
+		PBEWITHSHAAND128BITRC2-CBC
+		PBEWITHSHAAND128BITRC4
+		PBEWITHSHAAND192BITAES-CBC-BC
+		PBEWITHSHAAND2-KEYTRIPLEDES-CBC
+		PBEWITHSHAAND256BITAES-CBC-BC
+		PBEWITHSHAAND3-KEYTRIPLEDES-CBC
+		PBEWITHSHAAND40BITRC2-CBC
+		PBEWITHSHAAND40BITRC4
+		PBEWITHSHAANDIDEA-CBC
+		PBEWITHSHAANDTWOFISH-CBC
+	*/
+	
+	@Bean("jasyptStringEncryptor")
+	public StringEncryptor stringEncryptor() {
+		// BC 알고리즘 공급자 등록
+		Security.addProvider(new BouncyCastleProvider());
+				
+		// 암호화 알고리즘
+		String ALGORITHM = "PBEWithMD5AndDES";
+		// 암호화 키
+		String ENCRYPT_KEY = "hhackers";
+		StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+		encryptor.setPassword(ENCRYPT_KEY);			// 암호화 키
+		encryptor.setAlgorithm(ALGORITHM);			// 암호화 알고리즘
+		
+		//encryptor.setIvGenerator(new RandomIvGenerator());	// IV 설정 - AES 알고리즘 전용
+		
+		return encryptor;
+	}
+}

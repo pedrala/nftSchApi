@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tblin">
+
+	<!--  -->
+ 	<insert id="insertrequest" parameterType="hashMap">
+		<![CDATA[
+            insert into ${SYMBOL}_wallet.tbl_in ( 
+										c_tm							                          
+									]]>	     
+									<if test='NO > 0'>
+										<![CDATA[                                        
+                                        , no
+										]]>
+									</if>
+									<if test='C_TM != null'>
+										<![CDATA[										
+										, c_tm
+										]]>
+									</if>
+									<if test='USR_NO != null'>
+										<![CDATA[										
+										, usr_no
+										]]>
+									</if>									
+									<if test='FROM != null'>
+										<![CDATA[										
+										, `from`
+										]]>
+									</if>
+									<if test='TO != null'>
+										<![CDATA[												
+										, `to`
+										]]>
+									</if>
+									<if test='AMOUNT != null'>
+										<![CDATA[											
+										, amount
+										]]>
+									</if>
+									<if test='CONFIRM_NUM != null'>
+										<![CDATA[											
+										, confirm_num
+										]]>
+									</if>				
+									<if test='TXID != null'>
+										<![CDATA[											
+										, txid
+										]]>
+									</if>										
+								<![CDATA[
+                                      )
+				values	(
+						now()
+						]]>	        
+						<if test='NO > 0'>
+							<![CDATA[
+	            			, #{NO}
+							]]>
+						</if>
+						<if test='C_TM != null'>
+							<![CDATA[
+							, #{C_TM}
+							]]>
+						</if>
+						<if test='USR_NO != null'>
+							<![CDATA[
+							, #{USR_NO}
+							]]>
+						</if>						
+						<if test='FROM != null'>
+							<![CDATA[
+							, #{FROM}
+							]]>
+						</if>
+						<if test='TO != null'>
+							<![CDATA[												
+							, #{TO}
+							]]>
+						</if>
+						<if test='AMOUNT != null'>
+							<![CDATA[												
+							, #{AMOUNT}
+							]]>
+						</if>
+						<if test='CONFIRM_NUM != null'>
+							<![CDATA[
+	            			, #{CONFIRM_NUM}
+							]]>
+						</if>			
+						<if test='TXID != null'>
+							<![CDATA[
+	            			, #{TXID}
+							]]>
+						</if>		
+		<![CDATA[
+					)  
+		]]>
+		<selectKey keyProperty="NO" resultType="integer"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<!-- -->
+	<update id="updaterequest" parameterType="hashMap">
+		<![CDATA[
+			update	${SYMBOL}_wallet.tbl_in
+			set u_tm =  now()
+		]]>	
+		<if test='C_TM !=null'>
+			<![CDATA[			
+				, c_tm = #{C_TM}
+		]]>			
+		</if>
+		<if test='USR_NO !=null'>
+			<![CDATA[			
+				, usr_no = #{USR_NO}
+		]]>			
+		</if>			
+		<if test='FROM !=null'>
+			<![CDATA[				
+				, `from` = #{FROM}
+		]]>			
+		</if>
+		<if test='TO !=null'>
+			<![CDATA[				
+				, `to` = #{TO}
+		]]>			
+		</if>		
+		<if test='AMOUNT !=null'>
+			<![CDATA[				
+				, amount = #{AMOUNT}
+		]]>			
+		</if>
+		<if test='CONFIRM_NUM !=null'>
+			<![CDATA[				
+				, confirm_num = #{CONFIRM_NUM}
+		]]>			
+		</if>
+		<if test='TXID !=null'>
+			<![CDATA[				
+				, txid = #{TXID}
+		]]>			
+		</if>
+		<![CDATA[
+			where	no = #{NO}
+		]]>
+	</update>
+	
+	<!--  -->	
+	<select id="selectrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.no
+					, IFNULL(tw.c_tm, '0') AS c_tm
+					, IFNULL(tw.usr_no, '0') AS usr_no
+					, IFNULL(tw.from, '0') AS `from`
+					, IFNULL(tw.to, '0') AS `to`
+					, IFNULL(tw.amount, '0') AS amount
+					, IFNULL(tw.confirm_num, '0') AS confirm_num
+					, IFNULL(tw.txid, '0') AS txid
+					, IFNULL(tw.prev_amount, '0') AS nftids
+			FROM ${SYMBOL}_wallet.tbl_in tw
+			WHERE 1=1
+			]]>
+			<if test='NO > 0'>
+			<![CDATA[
+				AND tw.no=#{NO}
+			]]>
+			</if>								
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='USR_NO != null'>
+				<![CDATA[
+					AND tw.usr_no = #{USR_NO}
+				]]>
+			</if>
+			<if test='CONFIRM_NUM != null'>
+				<![CDATA[
+					AND tw.confirm_num = #{CONFIRM_NUM}
+				]]>
+			</if>
+			<if test='FROM != null'>
+				<![CDATA[
+					AND tw.`from` = #{FROM}
+				]]>
+			</if>	
+			<if test='TO != null'>
+				<![CDATA[
+					AND tw.`to` = #{TO}
+				]]>
+			</if>							
+			<if test='TXID != null'>
+				<![CDATA[
+					AND tw.txid = #{TXID}
+				]]>
+			</if>
+			<if test='PREV_AMOUNT != null'>
+				<![CDATA[
+					AND tw.prev_amount = #{PREV_AMOUNT}
+				]]>
+			</if>				
+			<if test='FROMD != null and TOD != ""'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FROMD} AND #{TOD}
+				]]>
+			</if>
+			<![CDATA[
+			ORDER BY 1 DESC
+			]]>
+			<if test='PAGENO != null and ROWS != null'>
+				<![CDATA[
+					LIMIT	#{PAGENO}, #{ROWS}
+				]]>
+			</if>
+	</select>	
+
+	<select id="countrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT COUNT(*) COUNT
+			FROM ${SYMBOL}_wallet.tbl_in tw 
+			WHERE 1=1
+			]]>
+			<if test='NO > 0'>
+			<![CDATA[
+				AND tw.no=#{NO}
+			]]>
+			</if>							
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='USR_NO != null'>
+				<![CDATA[
+					AND tw.usr_no = #{USR_NO}
+				]]>
+			</if>
+			<if test='FROM != null'>
+				<![CDATA[
+					AND tw.`from` = #{FROM}
+				]]>
+			</if>	
+			<if test='TO != null'>
+				<![CDATA[
+					AND tw.`to` = #{TO}
+				]]>
+			</if>				
+			<if test='CONFIRM_NUM != null'>
+				<![CDATA[
+					AND tw.confirm_num = #{CONFIRM_NUM}
+				]]>
+			</if>
+			<if test='TXID != null'>
+				<![CDATA[
+					AND tw.txid = #{TXID}
+				]]>
+			</if>
+			<if test='PREV_AMOUNT != null'>
+				<![CDATA[
+					AND tw.prev_amount = #{PREV_AMOUNT}
+				]]>
+			</if>			
+			<if test='FROMD != null and TOD != ""'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FROMD} AND #{TOD};
+				]]>
+			</if>
+	</select>
+			
+	<select id="selectone" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.no
+					, IFNULL(tw.c_tm, '0') AS c_tm
+					, IFNULL(tw.usr_no, '0') AS usr_no
+					, IFNULL(tw.from, '0') AS `from`
+					, IFNULL(tw.to, '0') AS `to`
+					, IFNULL(tw.amount, '0') AS amount
+					, IFNULL(tw.confirm_num, '0') AS confirm_num
+					, IFNULL(tw.txid, '0') AS txid
+					, IFNULL(tw.prev_amount, '0') AS nftids
+			FROM ${SYMBOL}_wallet.tbl_in tw
+			WHERE 1=1
+		]]>
+		<if test='NO > 0'>
+		<![CDATA[
+			AND tw.no=#{NO}
+		]]>
+		</if>
+		<if test='TXID != null'>
+			<![CDATA[
+				AND tw.txid = #{TXID}
+			]]>
+		</if>		
+		<!-- AND tb.account_number IS NOT NULL  -->
+		<!-- AND tb.account_number != '' -->
+		LIMIT 0, 1		
+	</select>
+	
+	<delete id="realdeleterequest" parameterType="hashMap">
+		<![CDATA[
+			delete from ${SYMBOL}_wallet.tbl_in where no = #{NO}
+		]]>
+	</delete>
+			
+	<select id="selectwallet" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.no
+					, IFNULL(tw.c_tm, '0') AS c_tm
+					, IFNULL(tw.usr_no, '0') AS usr_no
+					, IFNULL(tw.v_amount, '0') AS v_amount
+					, IFNULL(tw.t_amount, '0') AS t_amount
+					, IFNULL(tw.addr, '0') AS addr
+			FROM ${SYMBOL}_wallet.tbl_wallet tw
+			WHERE 1=1
+		]]>
+		<if test='NO > 0'>
+		<![CDATA[
+			AND tw.no=#{NO}
+		]]>
+		</if>
+		<if test='ADDR != null'>
+			<![CDATA[
+				AND tw.addr = #{ADDR}
+			]]>
+		</if>		
+		<if test='USR_NO != null'>
+			<![CDATA[
+				AND tw.usr_no = #{USR_NO}
+			]]>
+		</if>		
+		<!-- AND tb.account_number IS NOT NULL  -->
+		<!-- AND tb.account_number != '' -->
+		LIMIT 0, 1		
+	</select>
+	
+</mapper>	

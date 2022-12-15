@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tblwallet">
+
+	<!--  -->
+ 	<insert id="insertrequest" parameterType="hashMap">
+		<![CDATA[
+            insert into ${SYMBOL}_wallet.tbl_wallet ( 
+										c_tm							                          
+									]]>	     
+									<if test='NO > 0'>
+										<![CDATA[                                        
+                                        , no
+										]]>
+									</if>
+									<if test='C_TM != null'>
+										<![CDATA[										
+										, c_tm
+										]]>
+									</if>
+									<if test='U_TM != null'>
+										<![CDATA[										
+										, u_tm
+										]]>
+									</if>
+									<if test='ADDR != null'>
+										<![CDATA[										
+										, addr
+										]]>
+									</if>
+									<if test='USR_NO != null'>
+										<![CDATA[										
+										, usr_no
+										]]>
+									</if>									
+									<if test='PREV_TM != null'>
+										<![CDATA[										
+										, prev_tm
+										]]>
+									</if>
+									<if test='PREV_AMOUNT != null'>
+										<![CDATA[												
+										, prev_amount
+										]]>
+									</if>
+									<if test='AMOUNT != null'>
+										<![CDATA[											
+										, amount
+										]]>
+									</if>
+									<if test='TXCOUNT != null'>
+										<![CDATA[											
+										, txcount
+										]]>
+									</if>
+									<if test='V_AMOUNT != null'>
+										<![CDATA[											
+										, v_amount
+										]]>
+									</if>
+									<if test='I_AMOUNT != null'>
+										<![CDATA[											
+										, i_amount
+										]]>
+									</if>
+									<if test='T_AMOUNT != null'>
+										<![CDATA[											
+										, t_amount
+										]]>
+									</if>				
+									<if test='T_FEE != null'>
+										<![CDATA[											
+										, t_fee
+										]]>
+									</if>		
+									<if test='T_CNT != null'>
+										<![CDATA[											
+										, t_cnt
+										]]>
+									</if>		
+									<if test='INOUT != null'>
+										<![CDATA[											
+										, inout
+										]]>
+									</if>		
+									<if test='CMA != null'>
+										<![CDATA[											
+										, cma
+										]]>
+									</if>		
+									<if test='WEIGHT != null'>
+										<![CDATA[											
+										, weight
+										]]>
+									</if>		
+									<if test='MAKER_FEE != null'>
+										<![CDATA[											
+										, maker_fee
+										]]>
+									</if>		
+									<if test='TAKER_FEE != null'>
+										<![CDATA[											
+										, taker_fee
+										]]>
+									</if>											
+								<![CDATA[
+                                      )
+				values	(
+						now()
+						]]>	        
+						<if test='NO > 0'>
+							<![CDATA[
+	            			, #{NO}
+							]]>
+						</if>
+						<if test='C_TM != null'>
+							<![CDATA[
+							, #{C_TM}
+							]]>
+						</if>
+						<if test='U_TM != null'>
+							<![CDATA[
+							, #{U_TM}
+							]]>
+						</if>
+						<if test='ADDR != null'>
+							<![CDATA[
+							, #{ADDR}
+							]]>
+						</if>
+						<if test='USR_NO != null'>
+							<![CDATA[
+							, #{USR_NO}
+							]]>
+						</if>						
+						<if test='PREV_TM != null'>
+							<![CDATA[
+							, #{PREV_TM}
+							]]>
+						</if>
+						<if test='PREV_AMOUNT != null'>
+							<![CDATA[												
+							, #{PREV_AMOUNT}
+							]]>
+						</if>
+						<if test='AMOUNT != null'>
+							<![CDATA[												
+							, #{AMOUNT}
+							]]>
+						</if>
+						<if test='TXCOUNT != null'>
+							<![CDATA[												
+							, #{TXCOUNT}
+							]]>
+						</if>
+						<if test='V_AMOUNT != null'>
+							<![CDATA[												
+							, #{V_AMOUNT}
+							]]>
+						</if>
+						<if test='AMOUNT != null'>
+							<![CDATA[												
+							, #{AMOUNT}
+							]]>
+						</if>
+						<if test='I_AMOUNT != null'>
+							<![CDATA[
+	            			, #{I_AMOUNT}
+							]]>
+						</if>		
+						<if test='T_AMOUNT != null'>
+							<![CDATA[
+	            			, #{T_AMOUNT}
+							]]>
+						</if>								
+						<if test='T_FEE != null'>
+							<![CDATA[
+	            			, #{T_FEE}
+							]]>
+						</if>		
+						<if test='T_CNT != null'>
+							<![CDATA[
+	            			, #{T_CNT}
+							]]>
+						</if>	
+						<if test='INOUT != null'>
+							<![CDATA[
+	            			, #{INOUT}
+							]]>
+						</if>	
+						<if test='CMA != null'>
+							<![CDATA[
+	            			, #{CMA}
+							]]>
+						</if>	
+						<if test='WEIGHT != null'>
+							<![CDATA[
+	            			, #{WEIGHT}
+							]]>
+						</if>	
+						<if test='MAKER_FEE != null'>
+							<![CDATA[
+	            			, #{MAKER_FEE}
+							]]>
+						</if>	
+						<if test='TAKER_FEE != null'>
+							<![CDATA[
+	            			, #{TAKER_FEE}
+							]]>
+						</if>	
+		<![CDATA[
+					)  
+		]]>
+		<selectKey keyProperty="NO" resultType="integer"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<!-- -->
+	<update id="updaterequest" parameterType="hashMap">
+		<![CDATA[
+			update	${SYMBOL}_wallet.tbl_wallet
+			set u_tm =  now()
+		]]>	
+		<if test='C_TM !=null'>
+			<![CDATA[			
+				, c_tm = #{C_TM}
+		]]>			
+		</if>
+		<if test='U_TM !=null'>
+			<![CDATA[				
+				, u_tm = #{U_TM}
+		]]>
+		</if>
+		<if test='ADDR !=null'>
+			<![CDATA[				
+				, addr = #{ADDR}
+		]]>
+		</if>
+		<if test='USR_NO !=null'>
+			<![CDATA[			
+				, usr_no = #{USR_NO}
+		]]>			
+		</if>			
+		<if test='PREV_TM !=null'>
+			<![CDATA[				
+				, prev_tm = #{PREV_TM}
+		]]>			
+		</if>
+		<if test='PREV_AMOUNT !=null'>
+			<![CDATA[				
+				, prev_amount = #{PREV_AMOUNT}
+		]]>			
+		</if>		
+		<if test='AMOUNT !=null'>
+			<![CDATA[				
+				, amount = #{AMOUNT}
+		]]>			
+		</if>
+		<if test='TXCOUNT !=null'>
+			<![CDATA[				
+				, txcount = #{TXCOUNT}
+		]]>			
+		</if>
+		<if test='V_AMOUNT !=null'>
+			<![CDATA[				
+				, v_amount = #{V_AMOUNT}
+		]]>			
+		</if>
+		<if test='I_AMOUNT !=null'>
+			<![CDATA[				
+				, i_amount = #{I_AMOUNT}
+		]]>			
+		</if>
+		<if test='T_AMOUNT !=null'>
+			<![CDATA[				
+				, t_amount = #{T_AMOUNT}
+		]]>			
+		</if>
+		<if test='T_FEE !=null'>
+			<![CDATA[				
+				, t_fee = #{T_FEE}
+		]]>			
+		</if>
+		<if test='T_CNT !=null'>
+			<![CDATA[				
+				, t_cnt = #{T_CNT}
+		]]>			
+		</if>
+		<if test='INOUT !=null'>
+			<![CDATA[				
+				, inout = #{INOUT}
+		]]>			
+		</if>
+		<if test='CMA !=null'>
+			<![CDATA[				
+				, cma = #{CMA}
+		]]>			
+		</if>
+		<if test='WEIGHT !=null'>
+			<![CDATA[				
+				, weight = #{WEIGHT}
+		]]>			
+		</if>
+		<if test='MAKER_FEE !=null'>
+			<![CDATA[				
+				, maker_fee = #{MAKER_FEE}
+		]]>			
+		</if>
+		<if test='TAKER_FEE !=null'>
+			<![CDATA[				
+				, taker_fee = #{TAKER_FEE}
+		]]>			
+		</if>
+		<![CDATA[
+			where	addr = #{ADDR}
+		]]>
+	</update>
+	
+	<!--  -->	
+	<select id="selectrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.no
+					, IFNULL(tw.c_tm, '0') AS c_tm
+					, IFNULL(tw.u_tm, '0') AS u_tm
+					, IFNULL(tw.addr, '0') AS addr
+					, IFNULL(tw.usr_no, '0') AS usr_no
+					, tw.prev_amount
+					, IFNULL(tw.amount, '0') AS amount
+					, tw.txcount
+					, IFNULL(tw.v_amount, '0') AS v_amount
+					, IFNULL(tw.i_amount, '0') AS i_amount
+					, IFNULL(tw.t_amount, '0') AS t_amount
+					, IFNULL(tw.t_fee, '0') AS t_fee
+					, tw.t_cnt
+					, tw.inout
+					, tw.cma
+					, tw.weight
+					, tw.maker_fee
+					, tw.taker_fee
+			FROM ${SYMBOL}_wallet.tbl_wallet tw
+			WHERE 1=1
+			]]>
+			<if test='NO > 0'>
+			<![CDATA[
+				AND tw.no=#{NO}
+			]]>
+			</if>								
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='U_TM != null'>
+				<![CDATA[
+					AND tw.u_tm = #{U_TM}
+				]]>
+			</if>
+			<if test='ADDR != null'>
+				<![CDATA[
+					AND tw.addr = #{ADDR}
+				]]>
+			</if>
+			<if test='USR_NO != null'>
+				<![CDATA[
+					AND tw.usr_no = #{USR_NO}
+				]]>
+			</if>
+			<if test='TXCOUNT != null'>
+				<![CDATA[
+					AND tw.txcount = #{TXCOUNT}
+				]]>
+			</if>
+			<if test='V_AMOUNT != null'>
+				<![CDATA[
+					AND tw.v_amount = #{V_AMOUNT}
+				]]>
+			</if>
+			<if test='I_AMOUNT != null'>
+				<![CDATA[
+					AND tw.i_amount = #{I_AMOUNT}
+				]]>
+			</if>
+			<if test='T_AMOUNT != null'>
+				<![CDATA[
+					AND tw.t_amount = #{T_AMOUNT}
+				]]>
+			</if>
+			<if test='T_FEE != null'>
+				<![CDATA[
+					AND tw.t_fee = #{T_FEE}
+				]]>
+			</if>
+			<if test='FROMD != null and TOD != null'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FROMD} AND #{TOD}
+				]]>
+			</if>
+			<![CDATA[
+				ORDER BY 1 DESC
+			]]> 
+			<if test='PAGENO != null and ROWS != null'>
+				<![CDATA[
+					LIMIT	#{PAGENO}, #{ROWS}
+				]]> 
+			</if>
+	</select>
+
+	<select id="countrequest" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT COUNT(*) COUNT
+			FROM ${SYMBOL}_wallet.tbl_wallet tw 
+			WHERE 1=1
+			]]>
+			<if test='NO > 0'>
+			<![CDATA[
+				AND tw.no=#{NO}
+			]]>
+			</if>							
+			<if test='C_TM != null'>
+				<![CDATA[
+					AND tw.c_tm = #{C_TM}
+				]]>
+			</if>
+			<if test='U_TM != null'>
+				<![CDATA[
+					AND tw.u_tm = #{U_TM}
+				]]>
+			</if>
+			<if test='ADDR != null'>
+				<![CDATA[
+					AND tw.addr = #{ADDR}
+				]]>
+			</if>
+			<if test='USR_NO != null'>
+				<![CDATA[
+					AND tw.usr_no = #{USR_NO}
+				]]>
+			</if>
+			<if test='TXCOUNT != null'>
+				<![CDATA[
+					AND tw.txcount = #{TXCOUNT}
+				]]>
+			</if>
+			<if test='V_AMOUNT != null'>
+				<![CDATA[
+					AND tw.v_amount = #{V_AMOUNT}
+				]]>
+			</if>
+			<if test='I_AMOUNT != null'>
+				<![CDATA[
+					AND tw.i_amount = #{I_AMOUNT}
+				]]>
+			</if>
+			<if test='T_AMOUNT != null'>
+				<![CDATA[
+					AND tw.t_amount = #{T_AMOUNT}
+				]]>
+			</if>
+			<if test='T_FEE != null'>
+				<![CDATA[
+					AND tw.t_fee = #{T_FEE}
+				]]>
+			</if>
+			<if test='FROMD != null and TOD != null'>
+				<![CDATA[
+					AND DATE(tw.c_tm) BETWEEN #{FROMD} AND #{TOD}
+				]]>
+			</if>
+	</select>
+			
+	<select id="selectone" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT	tw.no
+					, IFNULL(tw.c_tm, '0') AS c_tm
+					, IFNULL(tw.u_tm, '0') AS u_tm
+					, IFNULL(tw.addr, '0') AS addr
+					, IFNULL(tw.usr_no, '0') AS usr_no
+					, tw.prev_amount
+					, IFNULL(tw.amount, '0') AS amount
+					, tw.txcount
+					, IFNULL(tw.v_amount, '0') AS v_amount
+					, IFNULL(tw.i_amount, '0') AS i_amount
+					, IFNULL(tw.t_amount, '0') AS t_amount
+					, IFNULL(tw.t_fee, '0') AS t_fee
+					, tw.t_cnt
+					, tw.inout
+					, tw.cma
+					, tw.weight
+					, tw.maker_fee
+					, tw.taker_fee
+			FROM ${SYMBOL}_wallet.tbl_wallet tw
+			WHERE 1=1
+		]]>
+		<if test='NO > 0'>
+		<![CDATA[
+			AND tw.no=#{NO}
+		]]>
+		</if>
+		<if test='USR_NO > 0'>
+		<![CDATA[
+			AND tw.usr_no=#{USR_NO}
+		]]>
+		</if>		
+		<if test='ADDR != null'>
+		<![CDATA[
+			AND tw.addr=#{ADDR}
+		]]>
+		</if>
+		<!-- AND tb.account_number IS NOT NULL  -->
+		<!-- AND tb.account_number != '' -->
+		LIMIT 0, 1		
+	</select>
+	
+	<delete id="realdeleterequest" parameterType="hashMap">
+		<![CDATA[
+			delete from ${SYMBOL}_wallet.tbl_wallet where no = #{NO}
+		]]>
+	</delete>
+
+</mapper>	
